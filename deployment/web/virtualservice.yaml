@@ -6,7 +6,7 @@ metadata:
 spec:
   virtualHost:
     domains:
-      - flightschool.thepilotclub.org
+      - moodle.thepilotclub.dev
     routes:
       - matchers:
           - prefix: /
@@ -17,5 +17,5 @@ spec:
               namespace: gloo-system
   sslConfig:
     secretRef:
-      name: cf-ssl
+      name: dev-cf-ssl
       namespace: gloo-system
