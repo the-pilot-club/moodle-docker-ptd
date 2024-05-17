@@ -24,7 +24,7 @@ COPY SessionBooking-2024032600.zip  /var/www/html/local/temp
 
 RUN set -ex \
     && cd /var/www/html/local/temp \
-    && unzip SessionBooking-2024032600.zip -d /var/www/html/local/booking \
+    && unzip SessionBooking-2024032600.zip -d /var/www/html/local \
     && rm -rf /var/www/html/local/temp \
     && cd ~ \
     && curl -L https://github.com/moodle/moodle/archive/refs/tags/${MOODLE_LMS_TAG}.tar.gz | tar -C /var/www/html --strip-components=1 -xz \
@@ -34,7 +34,6 @@ RUN set -ex \
     && curl -L https://github.com/mdjnelson/moodle-mod_customcert/archive/refs/tags/${MOODLE_MOD_CUSTOMCERT_TAG}.tar.gz | tar -C /var/www/html/mod/customcert --strip-components=1 -xz \
     && mkdir -p /var/www/html/admin/tool/forcedcache \
     && curl -L https://github.com/catalyst/moodle-tool_forcedcache/archive/${MOODLE_TOOL_FORCEDCACHE_COMMIT}.tar.gz | tar -C /var/www/html/admin/tool/forcedcache --strip-components=1 -xz \
-    && mkdir -p /var/www/html/local/booking \
     && chown -R www-data:www-data /var/www/html
 
 
