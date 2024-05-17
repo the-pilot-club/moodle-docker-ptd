@@ -18,7 +18,7 @@ RUN set -ex \
     && rm -rf /tmp/pear /var/lib/apt/lists/*
 
 # Install Moodle
-COPY SessionBooking-2024032600.zip /var/www/html/mod/booking
+COPY SessionBooking-2024032600.zip /var/www/html/local/booking
 RUN set -ex \
     && curl -L https://github.com/moodle/moodle/archive/refs/tags/${MOODLE_LMS_TAG}.tar.gz | tar -C /var/www/html --strip-components=1 -xz \
     && mkdir -p /var/www/html/lib/editor/atto/plugins/morefontcolors \

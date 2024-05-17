@@ -13,9 +13,11 @@ spec:
         routeAction:
           single:
             upstream:
-              name: moodle-web-80
+              name: ptdmoodle-web-80
               namespace: gloo-system
   sslConfig:
     secretRef:
       name: dev-cf-ssl
       namespace: gloo-system
+    sniDomains:
+      - moodle.thepilotclub.dev
