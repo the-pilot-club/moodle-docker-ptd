@@ -18,8 +18,15 @@ RUN set -ex \
     && rm -rf /tmp/pear /var/lib/apt/lists/*
 
 # Install Moodle
-COPY SessionBooking-2024032600.zip /var/www/html/local/booking
+RUN set -ex \ && mkdir -p /var/www/html/local/temp
+
+COPY SessionBooking-2024032600.zip  /var/www/html/local/temp
+
 RUN set -ex \
+    && cd /var/www/html/local/temp \
+    && unzip SessionBooking-2024032600.zip -d /var/www/html/local/booking \
+    && rm -rf /var/www/html/local/temp \
+    && cd ~ \
     && curl -L https://github.com/moodle/moodle/archive/refs/tags/${MOODLE_LMS_TAG}.tar.gz | tar -C /var/www/html --strip-components=1 -xz \
     && mkdir -p /var/www/html/lib/editor/atto/plugins/morefontcolors \
     && curl -L https://github.com/ndunand/moodle-atto_morefontcolors/archive/refs/tags/${MOODLE_ATTO_MOREFONTCOLORS_TAG}.tar.gz | tar -C /var/www/html/lib/editor/atto/plugins/morefontcolors --strip-components=1 -xz \
@@ -27,8 +34,8 @@ RUN set -ex \
     && curl -L https://github.com/mdjnelson/moodle-mod_customcert/archive/refs/tags/${MOODLE_MOD_CUSTOMCERT_TAG}.tar.gz | tar -C /var/www/html/mod/customcert --strip-components=1 -xz \
     && mkdir -p /var/www/html/admin/tool/forcedcache \
     && curl -L https://github.com/catalyst/moodle-tool_forcedcache/archive/${MOODLE_TOOL_FORCEDCACHE_COMMIT}.tar.gz | tar -C /var/www/html/admin/tool/forcedcache --strip-components=1 -xz \
+    && mkdir -p /var/www/html/local/booking \
     && chown -R www-data:www-data /var/www/html
-
 
 
 # Apply page_compression.patch (MDL-69196)
