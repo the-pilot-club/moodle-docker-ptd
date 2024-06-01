@@ -21,8 +21,8 @@ RUN set -ex \
 # Install Moodle
 RUN set -ex \
     && curl -L https://github.com/moodle/moodle/archive/refs/tags/${MOODLE_LMS_TAG}.tar.gz | tar -C /var/www/html --strip-components=1 -xz \
-    && mkdir -p /var/www/html/mod/local/booking \
-    && curl -L https://github.com/the-pilot-club/session-booking/archive/refs/tags/${SESSION_BOOKING_TAG}.tar.gz | tar -C /var/www/html/mod/local/booking --strip-components=1 -xz \
+    && mkdir -p /var/www/html/local/booking \
+    && curl -L https://github.com/the-pilot-club/session-booking/archive/refs/tags/${SESSION_BOOKING_TAG}.tar.gz | tar -C /var/www/html/local/booking --strip-components=1 -xz \
     && mkdir -p /var/www/html/lib/editor/atto/plugins/morefontcolors \
     && curl -L https://github.com/ndunand/moodle-atto_morefontcolors/archive/refs/tags/${MOODLE_ATTO_MOREFONTCOLORS_TAG}.tar.gz | tar -C /var/www/html/lib/editor/atto/plugins/morefontcolors --strip-components=1 -xz \
     && mkdir -p /var/www/html/mod/customcert \
