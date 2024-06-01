@@ -4,6 +4,7 @@ ARG MOODLE_LMS_TAG=v4.3.3
 ARG MOODLE_ATTO_MOREFONTCOLORS_TAG=2021062100
 ARG MOODLE_MOD_CUSTOMCERT_TAG=v4.2.4
 ARG MOODLE_TOOL_FORCEDCACHE_COMMIT=7f7e90b
+ARG SESSION_BOOKING_TAG=v1.0.0
 
 # Install PHP extensions
 RUN set -ex \
@@ -18,16 +19,10 @@ RUN set -ex \
     && rm -rf /tmp/pear /var/lib/apt/lists/*
 
 # Install Moodle
-RUN set -ex \ && mkdir -p /var/www/html/local/temp
-
-COPY SessionBooking-2024032600.zip  /var/www/html/local/temp
-
 RUN set -ex \
-    && cd /var/www/html/local/temp \
-    && unzip SessionBooking-2024032600.zip -d /var/www/html/local \
-    && rm -rf /var/www/html/local/temp \
-    && cd ~ \
     && curl -L https://github.com/moodle/moodle/archive/refs/tags/${MOODLE_LMS_TAG}.tar.gz | tar -C /var/www/html --strip-components=1 -xz \
+    && mkdir -p /var/www/html/mod/local/booking \
+    && curl -L https://github.com/the-pilot-club/session-booking/archive/refs/tags/${SESSION_BOOKING_TAG}.tar.gz | tar -C /var/www/html/mod/local/booking --strip-components=1 -xz \
     && mkdir -p /var/www/html/lib/editor/atto/plugins/morefontcolors \
     && curl -L https://github.com/ndunand/moodle-atto_morefontcolors/archive/refs/tags/${MOODLE_ATTO_MOREFONTCOLORS_TAG}.tar.gz | tar -C /var/www/html/lib/editor/atto/plugins/morefontcolors --strip-components=1 -xz \
     && mkdir -p /var/www/html/mod/customcert \
