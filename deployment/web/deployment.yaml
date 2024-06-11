@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: moodle
-          image: registry.digitalocean.com/tpc-master/ptd:5057a0b
+          image: registry.digitalocean.com/tpc-master/ptd:5832e69
           envFrom:
             - configMapRef:
                 name: web-env
